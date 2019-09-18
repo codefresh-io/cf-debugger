@@ -2,17 +2,17 @@
 # yarn lockfile v1
 
 
-"cf-pty@git+https://github.com/codefresh-io/pty.js.git#6ebbe41552371d3d372a95d60326e27a45cbaa0a":
+"cf-pty@git+https://github.com/codefresh-io/pty.js.git":
   version "1.0.0"
-  resolved "git+https://github.com/codefresh-io/pty.js.git#6ebbe41552371d3d372a95d60326e27a45cbaa0a"
+  resolved "git+https://github.com/codefresh-io/pty.js.git#def4e5e988f0f7617f7cc78b3f8091bfd1b191e0"
   dependencies:
-    extend "~1.2.1"
+    extend "^2.0.2"
     nan "^2.14.0"
 
-extend@~1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/extend/-/extend-1.2.1.tgz#a0f5fd6cfc83a5fe49ef698d60ec8a624dd4576c"
-  integrity sha1-oPX9bPyDpf5J72mNYOyKYk3UV2w=
+extend@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/extend/-/extend-2.0.2.tgz#1b74985400171b85554894459c978de6ef453ab7"
+  integrity sha512-AgFD4VU+lVLP6vjnlNfF7OeInLTyeyckCNPEsuxz1vi786UuK/nk6ynPuhn/h+Ju9++TQyr5EpLRI14fc1QtTQ==
 
 nan@^2.14.0:
   version "2.14.0"
