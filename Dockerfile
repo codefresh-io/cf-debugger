@@ -1,19 +1,17 @@
-FROM node:12-alpine
-
-#WORKDIR /root/cf-runtime
-
-#RUN apk add --no-cache bash git openssh-client
+FROM node:10-alpine
 
 COPY package.json ./
 
 COPY yarn.lock ./
 
 # install cf-runtime required binaries
-RUN apk update && apk upgrade && apk add --no-cache --virtual deps git python make g++ bash && \
-    yarn install --frozen-lockfile --production && \
-    yarn cache clean && \
-    apk del deps && \
-    rm -rf /tmp/*
+RUN apk update && apk upgrade && apk add --no-cache --virtual deps git python make g++ bash
+
+RUN yarn install --frozen-lockfile --production && yarn cache clean
+
+RUN rm -rf /tmp/*
+
+RUN ln -s /codefresh/volume/cf_export /bin/cf_export
 
 # copy app files
 COPY . ./
