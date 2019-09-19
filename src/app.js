@@ -1,6 +1,6 @@
 const pty = require('cf-pty');
 
-const shell = pty.spawn('sh', [], {
+const shell = pty.spawn('/bin/bash', [], {
     name: 'xterm',
     cwd: process.env.PWD,
     env: process.env
