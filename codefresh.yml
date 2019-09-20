@@ -42,7 +42,9 @@ steps:
         title: "Pushing image to registry with branch name"
         type: push
         candidate: ${{build}}
-        tag: ${{CF_BRANCH_TAG_NORMALIZED}}
+        tags:
+        - ${{CF_BRANCH_TAG_NORMALIZED}}
+        - latest
         when:
           steps:
             - name: build
@@ -54,7 +56,9 @@ steps:
         registry: "dockerhub"
         candidate: ${{build}}
         image_name: "codefresh/${{CF_REPO_NAME}}"
-        tag: ${{PACKAGE_VERSION}}
+        tags:
+        - ${{PACKAGE_VERSION}}
+        - latest
         when:
           branch:
             only: [ master ]
