@@ -2,7 +2,6 @@ version: "1.0"
 stages:
   - "clone"
   - "build"
-  - "integration"
   - "push"
 steps:
   main_clone:
@@ -37,6 +36,7 @@ steps:
             - success
   parallel_push:
     type: "parallel"
+    stage: "push"
     steps:
       push_to_registry_branch:
         title: "Pushing image to registry with branch name"
@@ -62,4 +62,3 @@ steps:
             - name: build
               on:
                 - success
-      stage: "push"
