@@ -1,0 +1,65 @@
+version: "1.0"
+stages:
+  - "clone"
+  - "build"
+  - "integration"
+  - "push"
+steps:
+  main_clone:
+    type: "git-clone"
+    description: "Cloning main repository..."
+    repo: "codefresh-io/cf-debugger"
+    revision: "${{CF_BRANCH}}"
+    stage: "clone"
+  build:
+    title: "Building Docker Image"
+    type: "build"
+    image_name: "codefresh/cf-debugger"
+    tag: "${{CF_BRANCH_TAG_NORMALIZED}}"
+    dockerfile: "Dockerfile"
+    stage: "build"
+  add_git_tag:
+    title: "Add Git tag"
+    stage: "build"
+    image: codefresh/cli
+    commands:
+      - 'apk update && apk add jq'
+      - 'export PACKAGE_VERSION=$(jq -r ".version" package.json)'
+      - "echo Current version: $PACKAGE_VERSION"
+      - "cf_export PACKAGE_VERSION"
+      - "git tag $PACKAGE_VERSION"
+    when:
+      branch:
+        only: [ master ]
+      steps:
+        - name: build
+          on:
+            - success
+  parallel_push:
+    type: "parallel"
+    steps:
+      push_to_registry_branch:
+        title: "Pushing image to registry with branch name"
+        type: push
+        candidate: ${{build}}
+        tag: ${{CF_BRANCH_TAG_NORMALIZED}}
+        when:
+          steps:
+            - name: build
+              on:
+                - success
+      push_to_registry_dockerhub:
+        title: "Pushing image to dockerhub registry"
+        type: "push"
+        registry: "dockerhub"
+        candidate: ${{build}}
+        image_name: "codefresh/${{CF_REPO_NAME}}"
+        tag: ${{PACKAGE_VERSION}}
+        when:
+          branch:
+            only: [ master ]
+          steps:
+            - name: build
+              on:
+                - success
+      stage: "push"
