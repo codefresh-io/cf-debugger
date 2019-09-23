@@ -6,6 +6,8 @@ const shell = pty.spawn('/bin/bash', [], {
     env: process.env
 });
 
-shell.on('close', () => process.exit());
+shell.on('exit', (code) => {
+    process.exit(code);
+});
 shell.pipe(process.stdout);
 process.stdin.pipe(shell);
