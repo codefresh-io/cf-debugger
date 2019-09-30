@@ -1,16 +1,16 @@
 const { Transform } = require('stream');
 
 class Resizer extends Transform {
-    constructor (shell) {
+    constructor (onResize) {
         super();
-        this.shell = shell;
+        this.onResize = onResize || function () {};
     }
 
     _transform(data, encoding, callback) {
-        const match = data.toString().match(/^\u001b\[8;(\d*);(\d*)t(.*)/);
+        const match = data.toString().match(/^(\\u001b|\u001b)\[8;(\d*);(\d*)t(.*)/i);
         if (match) {
-            this.shell.resize(+match[1], +match[2]);
-            match[3] && this.push(match[3]);
+            this.onResize(+match[2], +match[3]);
+            match[4] && this.push(match[4]);
         } else {
             this.push(data);
         }
