@@ -1,4 +1,5 @@
 const pty = require('cf-pty');
+const Resizer = require('./Resizer.js');
 
 const shell = pty.spawn('/bin/bash', [], {
     name: 'xterm',
@@ -9,5 +10,9 @@ const shell = pty.spawn('/bin/bash', [], {
 shell.on('exit', (code) => {
     process.exit(code);
 });
-shell.pipe(process.stdout);
-process.stdin.pipe(shell);
+
+const resizerStream = new Resizer(shell.resize.bind(shell));
+process.stdin
+    .pipe(resizerStream)
+    .pipe(shell)
+    .pipe(process.stdout);
