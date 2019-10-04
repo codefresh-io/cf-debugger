@@ -1,4 +1,8 @@
-FROM node:10-alpine
+FROM node:10.6.0-alpine
+
+RUN mkdir -p /debugger
+
+WORKDIR /debugger
 
 COPY package.json ./
 
@@ -18,5 +22,7 @@ COPY . ./
 
 EXPOSE 80
 
+ENTRYPOINT []
+
 # run application
-CMD ["node", "src/app.js"]
+CMD ["node", "/debugger/src/app.js"]
