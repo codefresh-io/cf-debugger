@@ -20,6 +20,8 @@ RUN ln -s /codefresh/volume/cf_export /bin/cf_export
 # copy app files
 COPY . ./
 
+ENV PS1="\w \\$ "
+
 EXPOSE 80
 
 ENTRYPOINT []
