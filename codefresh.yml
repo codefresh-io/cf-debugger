@@ -44,10 +44,23 @@ steps:
       push_to_registry_branch:
         title: "Pushing image to registry with branch name"
         type: push
+        registry: ${{REGISTRY_INTEGRATION_QUAY}}
         candidate: ${{build}}
         tags:
         - ${{CF_BRANCH_TAG_NORMALIZED}}
+
+      push_to_registry_quay:
+        title: "Pushing image to quay registry"
+        type: "push"
+        registry: ${{REGISTRY_INTEGRATION_QUAY}}
+        candidate: ${{build}}
+        image_name: "codefresh/${{CF_REPO_NAME}}"
+        tags:
+        - ${{PACKAGE_VERSION}}
         - latest
+        when:
+          branch:
+            only: [ master ]
 
       push_to_registry_dockerhub:
         title: "Pushing image to dockerhub registry"
