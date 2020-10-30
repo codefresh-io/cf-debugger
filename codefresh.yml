@@ -30,10 +30,7 @@ steps:
     when:
       branch:
         only: [ master ]
-      steps:
-        - name: build
-          on:
-            - success
+
   parallel_push:
     type: "parallel"
     stage: "push"
@@ -45,11 +42,7 @@ steps:
         tags:
         - ${{CF_BRANCH_TAG_NORMALIZED}}
         - latest
-        when:
-          steps:
-            - name: build
-              on:
-                - success
+
       push_to_registry_dockerhub:
         title: "Pushing image to dockerhub registry"
         type: "push"
@@ -62,7 +55,3 @@ steps:
         when:
           branch:
             only: [ master ]
-          steps:
-            - name: build
-              on:
-                - success
