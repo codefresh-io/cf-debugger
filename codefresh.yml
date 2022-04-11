@@ -1,6 +1,7 @@
 version: "1.0"
 stages:
   - "clone"
+  - "install"
   - "build"
   - "push"
 steps:
@@ -10,6 +11,13 @@ steps:
     repo: "codefresh-io/cf-debugger"
     revision: "${{CF_BRANCH}}"
     stage: "clone"
+  install:
+    title: "Install Docker Image"
+    image: node:10.6.0
+    stage: "install"
+    shell: bash
+    commands:
+      - yarn install --frozen-lockfile --production && yarn cache clean
   build:
     title: "Building Docker Image"
     type: "build"
