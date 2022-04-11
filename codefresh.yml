@@ -1,8 +1,9 @@
 version: "1.0"
 stages:
   - "clone"
-  - "build"
   - "install"
+  - "build"
+  - "push"
 steps:
   main_clone:
     type: "git-clone"
