@@ -1,4 +1,4 @@
-FROM node:12.22.11-alpine
+FROM node:10.24.1-alpine3.11
 
 RUN mkdir -p /debugger
 
