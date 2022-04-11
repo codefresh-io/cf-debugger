@@ -12,7 +12,7 @@ steps:
     stage: "clone"
   install:
     title: "Install Docker Image"
-    image: codefreshio/ci-helpers
+    image: node:10.24.1
     stage: "install"
     shell: bash
     commands:
