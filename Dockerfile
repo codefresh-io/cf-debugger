@@ -1,4 +1,4 @@
-FROM node:10.24.1
+FROM node:10.24.1-alpine
 
 RUN mkdir -p /debugger
 
@@ -9,9 +9,9 @@ COPY package.json ./
 COPY yarn.lock ./
 
 # install cf-runtime required binaries
-RUN apt-get update && apt-get install -y git python make g++ bash mc
+RUN apk update && apk upgrade && apk add --no-cache --virtual deps python make g++ bash mc
 
-RUN yarn install --frozen-lockfile --production && yarn cache clean
+# RUN yarn install --frozen-lockfile --production && yarn cache clean
 
 RUN rm -rf /tmp/*
 
