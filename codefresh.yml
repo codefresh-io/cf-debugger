@@ -15,8 +15,8 @@ steps:
     image: codefreshio/ci-helpers
     stage: "install"
     shell: bash
-      commands:
-        - yarn install --frozen-lockfile --production && yarn cache clean
+    commands:
+      - yarn install --frozen-lockfile --production && yarn cache clean
   build:
     title: "Building Docker Image"
     type: "build"
