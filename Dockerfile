@@ -8,6 +8,8 @@ COPY package.json ./
 
 COPY yarn.lock ./
 
+COPY node_modules ./
+
 # install cf-runtime required binaries
 RUN apk update && apk upgrade && apk add --no-cache --virtual deps python make g++ bash mc
 
