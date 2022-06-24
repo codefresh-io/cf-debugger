@@ -1,5 +1,6 @@
 FROM node:12.22.12-alpine
 
+RUN apk update && apk upgrade && apk add --no-cache bash mc
 RUN mkdir -p /debugger
 
 WORKDIR /debugger
@@ -7,14 +8,13 @@ WORKDIR /debugger
 COPY src src/
 COPY package.json ./
 COPY yarn.lock ./
-
 # install cf-runtime required binaries
-RUN apk update && apk upgrade && apk add bash mc make python2 g++ git --no-cache \
-    && yarn install --forzen-lockfile --production
+RUN apk add --no-cache --virtual buildDeps make python3 g++ git && \
+    yarn install --forzen-lockfile --production
 
-#RUN yarn cache clean && \
-#    apk del deps && \
-#    rm -rf /tmp/*
+RUN yarn cache clean && \
+    apk del buildDeps && \
+    rm -rf /tmp/*
 
 RUN ln -s /codefresh/volume/cf_export /bin/cf_export
 
