@@ -1,4 +1,4 @@
-const pty = require('cf-pty');
+const pty = require('node-pty');
 const Resizer = require('./Resizer.js');
 
 const shell = pty.spawn('/bin/bash', [], {
@@ -6,7 +6,6 @@ const shell = pty.spawn('/bin/bash', [], {
     cwd: process.env.PWD,
     env: process.env
 });
-
 shell.on('exit', (code) => {
     process.exit(code);
 });
