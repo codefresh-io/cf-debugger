@@ -13,7 +13,7 @@ steps:
     stage: "clone"
   install:
     title: "Install Docker Image"
-    image: node:12.22.12
+    image: node:14.20.0
     stage: "install"
     shell: bash
     commands:
@@ -36,9 +36,9 @@ steps:
       - "cf_export PACKAGE_VERSION"
       - |-
         source /get-token/get-gh-token.sh
-        if [[ "$(git describe --tags --abbrev=0)" == "${PACKAGE_VERSION}" ]]; then 
+        if [[ "$(git describe --tags --abbrev=0)" == "${PACKAGE_VERSION}" ]]; then
           echo "Git tag is already created, skipping..."
-          exit 0 
+          exit 0
         fi
         curl --fail -X POST -d "{\"ref\": \"refs/tags/${PACKAGE_VERSION}\", \"sha\": \"${CF_REVISION}\"}" -H "Authorization: token ${GITHUB_TOKEN}" https://api.github.com/repos/${CF_REPO_OWNER}/${CF_REPO_NAME}/git/refs
     when:
