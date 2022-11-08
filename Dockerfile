@@ -1,6 +1,7 @@
-FROM node:14.20.0-alpine
+FROM node:14.20.0-bullseye-slim
 
-RUN apk update && apk upgrade && apk add --no-cache bash mc
+RUN apt-get update && apt upgrade -y
+RUN apt-get install bash mc -y
 RUN mkdir -p /debugger
 
 WORKDIR /debugger
@@ -9,12 +10,16 @@ COPY src src/
 COPY package.json ./
 COPY yarn.lock ./
 # install cf-runtime required binaries
-RUN apk add --no-cache --virtual buildDeps make python3 g++ git && \
-    yarn install --forzen-lockfile --production
+RUN apt-get install make python3 g++ git -y && \
+    yarn install --frozen-lockfile --production -y
 
 RUN yarn cache clean && \
-    apk del buildDeps && \
-    rm -rf /tmp/*
+    apt-get remove make python3 g++ git -y && \
+    apt-get purge g++ git make python3  -y && \
+    apt-get autoremove -y && \
+    apt-get clean -y && \
+    rm -rf /tmp/* && \
+    rm -rf /var/lib/apt/lists/*
 
 RUN ln -s /codefresh/volume/cf_export /bin/cf_export
 
