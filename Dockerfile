@@ -18,8 +18,7 @@ RUN yarn cache clean && \
     apt-get purge g++ git make python3  -y && \
     apt-get autoremove -y && \
     apt-get clean -y && \
-    rm -rf /tmp/* && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /tmp/*
 
 RUN ln -s /codefresh/volume/cf_export /bin/cf_export
 
