@@ -1,7 +1,5 @@
 FROM node:14.20.0-bullseye-slim
 
-RUN apt-get update && apt upgrade -y
-RUN apt-get install bash mc -y
 RUN mkdir -p /debugger
 
 WORKDIR /debugger
@@ -10,10 +8,9 @@ COPY src src/
 COPY package.json ./
 COPY yarn.lock ./
 # install cf-runtime required binaries
-RUN apt-get install make python3 g++ git -y && \
-    yarn install --frozen-lockfile --production -y
-
-RUN yarn cache clean && \
+RUN apt-get update -y && apt-get install make python3 g++ git -y && \
+    yarn install --frozen-lockfile --production -y && \
+    yarn cache clean && \
     apt-get remove make python3 g++ git -y && \
     apt-get purge g++ git make python3  -y && \
     apt-get autoremove -y && \
