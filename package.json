@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "lint": "turbo run lint --output-logs=new-only"
+    "lint": "run lint --output-logs=new-only"
   },
   "dependencies": {
     "node-pty": "git+https://github.com/microsoft/node-pty.git"
