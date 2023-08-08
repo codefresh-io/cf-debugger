@@ -13,7 +13,7 @@ steps:
     stage: "clone"
   install:
     title: "Install Docker Image"
-    image: node:14.20.0
+    image: node:16.20.1
     stage: "install"
     shell: bash
     commands:
