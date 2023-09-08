@@ -4,7 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "resolutions": {
-    "nan": "2.17.0"
+    "nan": "2.17.0",
+    "semver": "7.5.2"
   },
   "dependencies": {
     "node-pty": "git+https://github.com/microsoft/node-pty.git"
