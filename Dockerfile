@@ -11,6 +11,7 @@ COPY package.json ./
 
 # install cf-runtime required binaries
 RUN apk add --no-cache --virtual buildDeps make python3 g++ git && \
+    npm update -g npm && \
     yarn install --production
 
 RUN yarn cache clean && \
