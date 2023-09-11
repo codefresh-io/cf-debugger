@@ -9,21 +9,21 @@ lru-cache@^6.0.0:
   dependencies:
     yallist "^4.0.0"
 
-nan@2.17.0, nan@^2.14.0:
+nan@2.17.0, nan@^2.17.0:
   version "2.17.0"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.17.0.tgz#c0150a2368a182f033e9aa5195ec76ea41a199cb"
   integrity sha512-2ZTgtl0nJsO0KQCjEpxcIr5D+Yv90plTitZt9JBfQvVJDS5seMl3FOvsh3+9CoYWXf/1l5OaZzzF6nDm4cagaQ==
 
 "node-pty@git+https://github.com/microsoft/node-pty.git":
-  version "0.10.0"
-  resolved "git+https://github.com/microsoft/node-pty.git#1674722e1caf3ff4dd52438b70ed68d46af83a6d"
+  version "1.0.0"
+  resolved "git+https://github.com/microsoft/node-pty.git#2f0f67d27ba2a01a04f92569b6153fe764c9a499"
   dependencies:
-    nan "^2.14.0"
+    nan "^2.17.0"
 
-semver@7.5.2:
-  version "7.5.2"
-  resolved "https://registry.yarnpkg.com/semver/-/semver-7.5.2.tgz#5b851e66d1be07c1cdaf37dfc856f543325a2beb"
-  integrity sha512-SoftuTROv/cRjCze/scjGyiDtcUyxw1rgYQSZY7XTmtR5hX+dm76iDbTH8TkLPHCQmlbQVSSbNZCPM2hb0knnQ==
+semver@7.5.4:
+  version "7.5.4"
+  resolved "https://registry.yarnpkg.com/semver/-/semver-7.5.4.tgz#483986ec4ed38e1c6c48c34894a9182dbff68a6e"
+  integrity sha512-1bCSESV6Pv+i21Hvpxp3Dx+pSD8lIPt8uVjRrxAUt/nbswYc+tK6Y2btiULjd4+fnq15PX+nqQDC7Oft7WkwcA==
   dependencies:
     lru-cache "^6.0.0"
 
