@@ -1,9 +1,6 @@
 const pty = require('node-pty');
 const Resizer = require('./Resizer.js');
 
-process.stdin.setEncoding('utf8');
-process.stdin.setRawMode(true);
-
 let exit = false;
 
 const shell = pty.spawn('/bin/bash', [], {
