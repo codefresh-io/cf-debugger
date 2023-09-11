@@ -7,12 +7,12 @@ WORKDIR /debugger
 # copy app files
 COPY src src/
 COPY package.json ./
-# don't use yarn.lock because dependencies are different in different OS
+COPY yarn.lock ./
 
 # install cf-runtime required binaries
 RUN apk add --no-cache --virtual buildDeps make python3 g++ git && \
     npm update -g npm && \
-    yarn install --production
+    yarn install --frozen-lockfile --production
 
 RUN yarn cache clean && \
     apk del buildDeps && \
