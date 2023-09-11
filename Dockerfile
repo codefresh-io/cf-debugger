@@ -8,7 +8,6 @@ WORKDIR /debugger
 COPY src src/
 COPY package.json ./
 COPY yarn.lock ./
-
 # install cf-runtime required binaries
 RUN apk add --no-cache --virtual buildDeps make python3 g++ git && \
     npm update -g npm && \
