@@ -1,4 +1,4 @@
-FROM node:16.20.1-alpine
+FROM node:18.17.1-alpine
 
 RUN apk update && apk upgrade && apk add --no-cache bash mc
 RUN mkdir -p /debugger
@@ -10,7 +10,8 @@ COPY package.json ./
 COPY yarn.lock ./
 # install cf-runtime required binaries
 RUN apk add --no-cache --virtual buildDeps make python3 g++ git && \
-    yarn install --forzen-lockfile --production
+    npm update -g npm && \
+    yarn install --frozen-lockfile --production
 
 RUN yarn cache clean && \
     apk del buildDeps && \
