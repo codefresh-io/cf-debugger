@@ -1,4 +1,4 @@
-FROM node:20.10.0-alpine
+FROM node:20.17.0-alpine3.20
 
 RUN apk update && apk upgrade && apk add --no-cache bash mc
 RUN mkdir -p /debugger
