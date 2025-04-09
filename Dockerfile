@@ -1,4 +1,4 @@
-ARG NODE_VERSION=22.14.0
+ARG NODE_VERSION=20.17.0
 FROM node:${NODE_VERSION}-bookworm-slim AS base
 WORKDIR /debugger
 
