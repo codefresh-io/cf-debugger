@@ -3,6 +3,7 @@ FROM node:${NODE_VERSION}-bookworm-slim AS base
 WORKDIR /debugger
 
 FROM base AS builder
+RUN apt-get update && apt-get install -y make python3 g++ git
 COPY package.json yarn.lock ./
 RUN yarn install --frozen-lockfile --production
 
