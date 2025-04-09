@@ -1,7 +1,6 @@
 ARG NODE_VERSION=20.19.0
 FROM node:${NODE_VERSION}-bookworm-slim AS base
 WORKDIR /debugger
-RUN ln -s /codefresh/volume/cf_export /bin/cf_export
 
 FROM base AS builder
 RUN apt-get update && apt-get install -y make python3 g++ git
@@ -9,6 +8,8 @@ COPY package.json yarn.lock ./
 RUN yarn install --frozen-lockfile --production
 
 FROM base AS final
+RUN ln -s /codefresh/volume/cf_export /bin/cf_export
+
 # purpose of security
 RUN npm uninstall -g --logs-max=0 corepack npm
 USER node
