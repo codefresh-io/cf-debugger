@@ -16,4 +16,7 @@ ENV LS_COLORS='rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;
 RUN npm uninstall -g --logs-max=0 corepack npm
 USER node
 
+COPY --from=builder --chown=node:node /debugger/node_modules node_modules
+COPY --chown=node:node src src
+
 CMD ["node", "/debugger/src/app.js"]
