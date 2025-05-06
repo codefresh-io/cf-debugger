@@ -1,9 +1,15 @@
+const { resolve } = require('path');
 const pty = require('node-pty');
 const Resizer = require('./Resizer.js');
 
+const bashrcPath = resolve(__dirname, './.bashrc');
+
 let exit = false;
 
-const shell = pty.spawn('/bin/bash', [], {
+const shell = pty.spawn('bash', [
+    '--init-file',
+    bashrcPath,
+], {
     name: 'xterm-color',
     cwd: process.env.PWD,
     env: process.env
